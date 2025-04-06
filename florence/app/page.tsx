@@ -39,7 +39,7 @@ export function Home() {
                 formData
             );
             console.log(response.data);
-            setResult(response.data.result['<CAPTION>']);
+            setResult(response.data.result['<MORE_DETAILED_CAPTION>']);
         } catch (error) {
             console.error('Error:', error);
             setResult({ error: 'Something went wrong' });
@@ -67,7 +67,7 @@ export function Home() {
                                     </Badge>
                                 </div>
                             </CardHeader>
-                            <CardFooter className='flex-col items-start gap-1 text-sm min-h-100 max-h-100'>
+                            <CardFooter className='flex-col items-start gap-1 text-sm min-h-140 max-h-140'>
                                 <form onSubmit={handleSubmit}>
                                     <div className='flex px-4 lg:px-4'>
                                         <Input
@@ -102,7 +102,7 @@ export function Home() {
                                 </Badge>
                             </div>
                         </CardHeader>
-                        <CardFooter className='flex-col items-start gap-1 text-sm min-h-100 max-h-100'>
+                        <CardFooter className='flex-col items-start gap-1 text-sm min-h-140 max-h-140 '>
                             {image && (
                                 <div>
                                     <h2>Preview:</h2>
@@ -116,13 +116,18 @@ export function Home() {
                                     />
                                 </div>
                             )}
-
-                            {result && (
-                                <div>
-                                    <h2>Result:</h2>
-                                    <pre>{JSON.stringify(result, null, 2)}</pre>
-                                </div>
-                            )}
+                            <div className='w-10'>
+                                {result && (
+                                    <div className='mt-6 w-full max-w-md'>
+                                        <h2 className='text-xl font-semibold mb-2'>
+                                            Result:
+                                        </h2>
+                                        <div className='w-150 h-[150px] bg-slate-100 p-4 rounded-md text-slate-700 shadow-inner overflow-auto break-words'>
+                                            {JSON.stringify(result, null, 2)}
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
                         </CardFooter>
                     </Card>
                 </div>

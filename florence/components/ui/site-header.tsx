@@ -10,11 +10,17 @@ export function SiteHeader() {
                     orientation='vertical'
                     className='mx-2 data-[orientation=vertical]:h-4'
                 />
-                <h1 className='text-base font-medium'>
-                    Florence-2-Base Caption Service
+                <h1 className='text-base font-medium w-100'>
+                    Florence-2-Base Captioning Service
                 </h1>
-                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                    <div>
+                <div
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'flex-end',
+                        width: '100%',
+                    }}
+                >
+                    <div style={{ justifyContent: 'flex-end' }}>
                         <ModeToggle />
                     </div>
                 </div>
