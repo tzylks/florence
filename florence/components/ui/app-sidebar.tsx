@@ -46,11 +46,11 @@ const data = {
         // },
     ],
     navSecondary: [
-        {
-            title: 'Settings',
-            url: '#',
-            icon: SettingsIcon,
-        },
+        // {
+        //     title: 'Settings',
+        //     url: '#',
+        //     icon: SettingsIcon,
+        // },
     ],
 };
 

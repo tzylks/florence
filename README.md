@@ -7,6 +7,7 @@ The overall purpose of this application is to provide a GUI that works with the 
 # Main Technologies & Libraries
 
 -   python
+-   flask
 -   next.js
 -   shadcn
 -   lucide
