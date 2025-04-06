@@ -70,7 +70,7 @@ def predict():
         image_file = request.files['image']
         image = Image.open(image_file).convert("RGB")
 
-        task_prompt = "<MORE_DETAILED_CAPTION>"
+        task_prompt = "<DETAILED_CAPTION>"
         inputs = processor(text=task_prompt, images=image, return_tensors="pt").to(device, torch_dtype)
 
         input_ids = inputs["input_ids"]  # Long (torch.int64)

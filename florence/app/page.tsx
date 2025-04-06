@@ -40,7 +40,7 @@ export function Home() {
                 formData
             );
             console.log(response.data);
-            setResult(response.data.result['<MORE_DETAILED_CAPTION>']);
+            setResult(response.data.result['<DETAILED_CAPTION>']);
         } catch (error) {
             console.error('Error:', error);
             setResult({ error: 'Something went wrong' });
