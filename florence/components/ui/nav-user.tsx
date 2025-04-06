@@ -1,12 +1,9 @@
 'use client';
 
-import {
-    BellIcon,
-    CreditCardIcon,
-    LogOutIcon,
-    MoreVerticalIcon,
-    UserCircleIcon,
-} from 'lucide-react';
+import { LogOutIcon, MoreVerticalIcon, UserCircleIcon } from 'lucide-react';
+
+import axios from 'axios';
+import Cookies from 'js-cookie';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
@@ -36,6 +33,15 @@ export function NavUser({
 }) {
     const { isMobile } = useSidebar();
 
+    const handleLogout = async () => {
+        await axios.post(
+            'http://localhost:5001/logout',
+            {},
+            { withCredentials: true }
+        );
+        Cookies.remove('token'); // Optional, since backend clears it
+        window.location.href = '/login'; // Force redirect
+    };
     return (
         <SidebarMenu>
             <SidebarMenuItem>
@@ -100,7 +106,7 @@ export function NavUser({
                             </DropdownMenuItem>
                         </DropdownMenuGroup>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem>
+                        <DropdownMenuItem onClick={handleLogout}>
                             <LogOutIcon />
                             Log out
                         </DropdownMenuItem>

@@ -1,11 +1,11 @@
 // app/login/page.jsx
-'use client'; // Required for client-side features like useState
+'use client';
 
 import { useState } from 'react';
-import { Input } from '@/components/ui/input'; // Adjust path based on your setup
+import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import axios from 'axios';
-import { useRouter } from 'next/navigation'; // Next.js navigation hook
+import { useRouter } from 'next/navigation';
 
 export default function Login() {
     const [email, setEmail] = useState('');
@@ -20,13 +20,14 @@ export default function Login() {
         setError(null);
 
         try {
-            // Placeholder for Flask /login endpoint
-            const response = await axios.post('http://localhost:5001/login', {
-                email,
-                password,
-            });
-            console.log('Login successful:', response.data);
-            router.push('/'); // Redirect to home (demo) page
+            await axios.post(
+                'http://localhost:5001/login',
+                { email, password },
+                {
+                    withCredentials: true, // Send/receive cookies
+                }
+            );
+            router.push('/'); // Redirect to demo
         } catch (err: any) {
             setError(err.response?.data?.error || 'Login failed');
         } finally {
@@ -58,7 +59,6 @@ export default function Login() {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             placeholder='Enter your email'
-                            className='w-full'
                             required
                         />
                     </div>
@@ -76,7 +76,6 @@ export default function Login() {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             placeholder='Enter your password'
-                            className='w-full'
                             required
                         />
                     </div>

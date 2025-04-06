@@ -5,7 +5,7 @@ import axios from 'axios';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { SiteHeader } from '@/components/ui/site-header';
-import { Badge, TrendingUpIcon } from 'lucide-react';
+import { Badge, FileUp, FileImage } from 'lucide-react';
 import {
     Card,
     CardDescription,
@@ -67,79 +67,85 @@ export function Home() {
                                             File Upload
                                         </CardTitle>
                                         <div className='absolute right-4 top-4'>
-                                            <Badge className='flex gap-1 rounded-lg text-xs'>
-                                                <TrendingUpIcon className='size-3' />
-                                                +12.5%
+                                            <Badge className='flex gap-1 round-lg text-xs'>
+                                                <FileUp className='size-1' />
                                             </Badge>
                                         </div>
                                     </CardHeader>
                                     <CardFooter className='flex-col items-start gap-1 text-sm min-h-10 max-h-50'>
-                                        <form onSubmit={handleSubmit}>
-                                            <div className='flex px-4 lg:px-4'>
-                                                <Input
-                                                    type='file'
-                                                    accept='image/*'
-                                                    onChange={handleImageChange}
-                                                    className='w-full mr-2'
-                                                />
-                                                <Button
-                                                    type='submit'
-                                                    disabled={loading}
-                                                >
-                                                    {loading
-                                                        ? 'Processing...'
-                                                        : 'Get Result'}
-                                                </Button>
-                                            </div>
-                                        </form>
+                                        <div className='flex px-4 lg:px-4'>
+                                            <Input
+                                                type='file'
+                                                accept='image/*'
+                                                onChange={handleImageChange}
+                                                className='w-full mr-2'
+                                            />
+                                        </div>
                                     </CardFooter>
                                 </Card>
                             </div>
-                            <Card className='@container/card'>
-                                <CardHeader className='relative'>
-                                    <CardDescription>Results</CardDescription>
-                                    <CardTitle className='@[250px]/card:text-3xl text-2xl font-semibold tabular-nums'>
-                                        AI Image Captioning
-                                    </CardTitle>
-                                    <div className='absolute right-4 top-4'>
-                                        <Badge className='flex gap-1 rounded-lg text-xs'>
-                                            <TrendingUpIcon className='size-3' />
-                                            +12.5%
-                                        </Badge>
-                                    </div>
-                                </CardHeader>
-                                <CardFooter className='flex-col items-start gap-1 text-sm min-h-10 max-h-110 '>
-                                    {image && (
-                                        <div>
-                                            <h2>Preview:</h2>
-                                            <img
-                                                src={URL.createObjectURL(image)}
-                                                alt='Uploaded'
-                                                style={{
-                                                    maxWidth: '300px',
-                                                    maxHeight: '250px',
-                                                }}
-                                            />
-                                        </div>
-                                    )}
-                                    <div className='w-10'>
-                                        {result && (
-                                            <div className='mt-6 w-full max-w-md'>
-                                                <h2 className='text-xl font-semibold mb-2'>
-                                                    Result:
-                                                </h2>
-                                                <div className='w-250 h-[100px] bg-slate-100 p-4 rounded-md text-slate-700 shadow-inner overflow-auto break-words'>
-                                                    {JSON.stringify(
-                                                        result,
-                                                        null,
-                                                        2
-                                                    )}
+                            {image && (
+                                <Card className='@container/card'>
+                                    <CardHeader className='relative'>
+                                        <CardDescription>
+                                            Results
+                                        </CardDescription>
+                                        <CardTitle className='@[250px]/card:text-3xl text-2xl font-semibold tabular-nums flex gap-1'>
+                                            <div>AI Image Captioning</div>
+                                            <form onSubmit={handleSubmit}>
+                                                <div className='flex px-4 lg:px-4'>
+                                                    <Button
+                                                        type='submit'
+                                                        disabled={loading}
+                                                    >
+                                                        {loading
+                                                            ? 'Processing...'
+                                                            : 'Get Result'}
+                                                    </Button>
                                                 </div>
+                                            </form>
+                                        </CardTitle>
+                                        <div className='absolute right-4 top-4'>
+                                            <Badge className='flex gap-1 rounded-lg text-xs'>
+                                                <FileImage className='size-3' />
+                                            </Badge>
+                                        </div>
+                                    </CardHeader>
+                                    <CardFooter className='flex-col items-start gap-1 text-sm min-h-5 max-h-110 '>
+                                        {image && (
+                                            <div>
+                                                <h2>Preview:</h2>
+                                                <img
+                                                    src={URL.createObjectURL(
+                                                        image
+                                                    )}
+                                                    alt='Uploaded'
+                                                    style={{
+                                                        maxWidth: '300px',
+                                                        maxHeight: '250px',
+                                                    }}
+                                                />
                                             </div>
                                         )}
-                                    </div>
-                                </CardFooter>
-                            </Card>
+                                        <div className='w-10'>
+                                            {result && (
+                                                <div className='mt-6 w-full max-w-md'>
+                                                    <h2 className='text-xl font-semibold mb-2'>
+                                                        Result:
+                                                    </h2>
+                                                    <div className='w-250 h-[100px] bg-slate-100 p-4 rounded-md text-slate-700 shadow-inner overflow-auto break-words'>
+                                                        {JSON.stringify(
+                                                            result,
+                                                            null,
+                                                            2
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            )}
+                                        </div>
+                                    </CardFooter>
+                                </Card>
+                            )}
                         </div>
                     </div>
                 </SidebarInset>
