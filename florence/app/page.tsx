@@ -16,7 +16,7 @@ import {
 import { AppSidebar } from '@/components/ui/app-sidebar';
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 
-export function Home() {
+export default function Home() {
     const [image, setImage] = useState<File | null>(null);
     const [result, setResult] = useState<string | { error: string } | null>(
         null
@@ -157,5 +157,3 @@ export function Home() {
         </div>
     );
 }
-
-export default Home;
