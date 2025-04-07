@@ -34,13 +34,9 @@ export function NavUser({
     const { isMobile } = useSidebar();
 
     const handleLogout = async () => {
-        await axios.post(
-            'http://localhost:5001/logout',
-            {},
-            { withCredentials: true }
-        );
-        Cookies.remove('token'); // Optional, since backend clears it
-        window.location.href = '/login'; // Force redirect
+        await axios.post('/api/logout', {}, { withCredentials: true });
+        Cookies.remove('token');
+        window.location.href = '/login';
     };
     return (
         <SidebarMenu>

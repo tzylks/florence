@@ -35,11 +35,10 @@ export function Home() {
         formData.append('image', image);
 
         try {
-            const response = await axios.post(
-                'http://localhost:5001/predict',
-                formData
-            );
-            console.log(response.data);
+            const response = await axios.post('/api/predict', formData, {
+                headers: { 'Content-Type': 'multipart/form-data' },
+                withCredentials: true,
+            });
             setResult(response.data.result['<DETAILED_CAPTION>']);
         } catch (error) {
             console.error('Error:', error);

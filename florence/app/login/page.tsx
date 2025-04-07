@@ -21,13 +21,11 @@ export default function Login() {
 
         try {
             await axios.post(
-                'http://localhost:5001/login',
+                '/api/login',
                 { email, password },
-                {
-                    withCredentials: true, // Send/receive cookies
-                }
+                { withCredentials: true }
             );
-            router.push('/'); // Redirect to demo
+            router.push('/');
         } catch (err: any) {
             setError(err.response?.data?.error || 'Login failed');
         } finally {
