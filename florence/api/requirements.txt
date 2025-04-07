@@ -3,4 +3,4 @@ flask-cors
 transformers
 pillow
 pyjwt
-torch==2.0.1 --extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.3.0 --extra-index-url https://download.pytorch.org/whl/cpu
