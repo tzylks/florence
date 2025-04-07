@@ -26,7 +26,8 @@ export default function Login() {
                 { withCredentials: true }
             );
             router.push('/');
-        } catch (err) {
+        } catch (err: unknown) {
+            console.log(err);
             setError('Login failed');
         } finally {
             setLoading(false);
