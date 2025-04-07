@@ -1,11 +1,10 @@
-# api/index.py for vercel deploy
+# api/index.py
 from flask import Flask, request, jsonify, make_response
 from flask_cors import CORS
 from transformers import AutoProcessor, AutoModelForCausalLM
-from torch import torch
+import torch
 from PIL import Image
 import io
-import traceback
 import jwt
 import datetime
 import os
@@ -16,12 +15,18 @@ CORS(app, supports_credentials=True)
 # Load secret key from environment variable
 SECRET_KEY = os.getenv("FLASK_SECRET_KEY", "your-secret-key-for-dev-only")
 
-# Florence-2 setup
+# Florence-2 setup (lazy-loaded)
 device = "cpu"
 torch_dtype = torch.float32
 model_name = "microsoft/Florence-2-base"
-model = AutoModelForCausalLM.from_pretrained(model_name, torch_dtype=torch_dtype, trust_remote_code=True).to(device)
-processor = AutoProcessor.from_pretrained(model_name, trust_remote_code=True)
+model = None
+processor = None
+
+def load_model():
+    global model, processor
+    if model is None or processor is None:
+        model = AutoModelForCausalLM.from_pretrained(model_name, torch_dtype=torch_dtype, trust_remote_code=True).to(device)
+        processor = AutoProcessor.from_pretrained(model_name, trust_remote_code=True)
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -56,7 +61,10 @@ def predict():
 
     if 'image' not in request.files:
         return jsonify({'error': 'No image provided'}), 400
-    
+
+    # Load model on first use
+    load_model()
+
     image_file = request.files['image']
     image = Image.open(image_file).convert("RGB")
     task_prompt = "<CAPTION>"
@@ -75,6 +83,5 @@ def predict():
     result = processor.post_process_generation(generated_text, task=task_prompt, image_size=(image.width, image.height))
     return jsonify({'result': result})
 
-# Vercel requires a WSGI-compatible app
 if __name__ == '__main__':
     app.run()
