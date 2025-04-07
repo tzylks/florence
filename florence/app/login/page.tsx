@@ -1,7 +1,7 @@
 // app/login/page.jsx
 'use client';
 
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import axios from 'axios';
@@ -10,11 +10,11 @@ import { useRouter } from 'next/navigation';
 export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState(null);
+    const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
     const router = useRouter();
 
-    const handleSubmit = async (e: any) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setLoading(true);
         setError(null);
@@ -26,8 +26,8 @@ export default function Login() {
                 { withCredentials: true }
             );
             router.push('/');
-        } catch (err: any) {
-            setError(err.response?.data?.error || 'Login failed');
+        } catch (err) {
+            setError('Login failed');
         } finally {
             setLoading(false);
         }

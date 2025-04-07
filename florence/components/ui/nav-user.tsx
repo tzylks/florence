@@ -1,6 +1,6 @@
 'use client';
 
-import { LogOutIcon, MoreVerticalIcon, UserCircleIcon } from 'lucide-react';
+import { LogOutIcon, MoreVerticalIcon } from 'lucide-react';
 
 import axios from 'axios';
 import Cookies from 'js-cookie';
@@ -9,7 +9,6 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
     DropdownMenu,
     DropdownMenuContent,
-    DropdownMenuGroup,
     DropdownMenuItem,
     DropdownMenuLabel,
     DropdownMenuSeparator,

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import axios from 'axios';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -17,16 +17,21 @@ import { AppSidebar } from '@/components/ui/app-sidebar';
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 
 export function Home() {
-    const [image, setImage] = useState(null);
-    const [result, setResult] = useState<any>(null);
+    const [image, setImage] = useState<File | null>(null);
+    const [result, setResult] = useState<string | { error: string } | null>(
+        null
+    );
     const [loading, setLoading] = useState(false);
 
-    const handleImageChange = (e: any) => {
-        setImage(e.target.files[0]);
-        setResult(null); // Reset result when new image is selected
+    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (file) {
+            setImage(file);
+            setResult(null); // Reset result when new image is selected
+        }
     };
 
-    const handleSubmit = async (e: any) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (!image) return;
 

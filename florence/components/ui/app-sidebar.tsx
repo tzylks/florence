@@ -1,23 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import {
-    ArrowUpCircleIcon,
-    BarChartIcon,
-    CameraIcon,
-    ClipboardListIcon,
-    DatabaseIcon,
-    FileCodeIcon,
-    FileIcon,
-    FileTextIcon,
-    FolderIcon,
-    HelpCircleIcon,
-    LayoutDashboardIcon,
-    ListIcon,
-    SearchIcon,
-    SettingsIcon,
-    UsersIcon,
-} from 'lucide-react';
+import { ArrowUpCircleIcon } from 'lucide-react';
 
 import { NavMain } from '@/components/ui/nav-main';
 import { NavSecondary } from '@/components/ui/nav-secondary';
