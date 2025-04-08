@@ -18,7 +18,7 @@ The overall purpose of this application is to provide a GUI that works with the 
 start server with `python3 server.py`
 
 # next server
-
+cd into /src
 start server with `npm run dev`
 
 # dummy login credentials (required)
